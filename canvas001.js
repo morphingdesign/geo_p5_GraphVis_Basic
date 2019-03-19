@@ -9,7 +9,7 @@ var bgColor = [0, 25, 50];         // Dark blue color
 var ptSize = 1;
 var ptColor = [255, 255, 255];
 var density = .1;
-var zoom = 10;
+var zoom = 14;
 var speed = 0.01;
 
 // Declare particle generator
