@@ -5,15 +5,20 @@
 let gui;
 
 // GUI library requires the use of 'var' to define variables, and not 'let'
-var bgColor = [0, 0, 0];
+var bgColor = [0, 25, 50];         // Dark blue color
 var ptSize = 1;
 var ptColor = [255, 255, 255];
 var density = .1;
 var zoom = 10;
 var speed = 0.01;
 
+// Declare particle generator
+var particleGen;
+
 // Color declaration
 let blackSolid, whiteSolid, redSolid, greenSolid, blueSolid;
+// Used for particles
+let blackAlpha10, blackAlpha50, blackAlpha100, blackAlpha150, blackAlpha200;
 
 let depth = 100;
 let scalar;
@@ -37,9 +42,17 @@ function setup(){
     redSolid = color(255, 0, 0);
     greenSolid = color(0, 255, 0);
     blueSolid = color(0, 0, 255);
+    // Use for particles
+    blackAlpha10 = color(0, 0, 0, 10);
+    blackAlpha50 = color(0, 0, 0, 50);
+    blackAlpha100 = color(0, 0, 0, 100);
+    blackAlpha150 = color(0, 0, 0, 150);
+    blackAlpha200 = color(0, 0, 0, 200);
 
     // Initialize GUI
-    gui = createGui('Control Panel');
+    // Parameters include: (label (which can be wrapped text), x-pos from left,
+    // y-pos from top)
+    gui = createGui('Control Panel (Double-click menu to expand/collapse', 20, 20);
 
     // slider range controls
     /** sliderRange() function parameters include:
@@ -72,6 +85,33 @@ function setup(){
 
     // only call draw when then gui is changed
     //noLoop();
+
+    // Variable with JSON data to initiate particles
+    var t =
+        {
+            name: "test",
+            colors: [blackAlpha10, blackAlpha200],
+            // Gravity draws the particles back down based on lifetime parameter
+            gravity: .1,
+            // Lifetime is number of steps for each particle to live
+            lifetime: 300,
+            angle: [260,280],
+            // Size is range of randomness in particle size
+            size: [2,8],
+            speed: 14,
+            speedx: 1,
+            //40 at .1 probability/step
+            //then 200 steps at 10 particles/step
+            rate: [500,10],
+            // xPos of source, fraction of screen width
+            x: 0,
+            // yPos of source, fraction of screen width
+            y: .5
+        };
+
+    // Initiate particle generator
+    particleGen = new Fountain(null, t);
+
 }
 
 //**********************************************************************************
@@ -111,6 +151,14 @@ function draw() {
         }
     }
     pop();
+
+    // Drawing of generated particles
+    particleGen.Draw();
+    particleGen.Create();
+    particleGen.Step();
+    noStroke();
+    text(particleGen.length, width/2, 20);
+    stroke(0);
 
 }
 
