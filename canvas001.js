@@ -18,8 +18,6 @@ let u, v;
 //**********************************************************************************
 // Setup function
 function setup(){
-    // Setup canvas
-
 
     // Color initialization
     whiteSolid = color(255, 255, 255);
@@ -33,9 +31,6 @@ function setup(){
     // set opacity range
     sliderRange(0, 255, 1);
     gui.addGlobals('opacity', 'bgColor');
-
-    // only call draw when then gui is changed
-    //noLoop();
 
 }
 
@@ -61,7 +56,6 @@ function draw() {
     // Point mesh
     stroke(blueSolid, opacity);
     strokeWeight(1);
-    noFill();
     for(u = -PI; u < PI; u+=iteration) {
         for(v = -PI; v < PI; v+=iteration) {
             let ptX = (2 * sin(3 * u) / (2 + cos(v))) * scalar;
