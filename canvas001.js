@@ -3,11 +3,13 @@
 
 // GUI
 let gui;
+var bgColor = [0, 0, 0];
+var opacity = 150;
 
+var ptColor = [0, 0, 0];
 // Color declaration
 let blackSolid, whiteSolid, redSolid, greenSolid, blueSolid;
-let bgColor = [0, 0, 0];
-let opacity = 150;
+
 
 let depth = 100;
 let scalar;
@@ -18,6 +20,9 @@ let u, v;
 //**********************************************************************************
 // Setup function
 function setup(){
+
+    // Setup canvas
+    createCanvas(windowWidth, windowHeight, WEBGL);
 
     // Color initialization
     whiteSolid = color(255, 255, 255);
@@ -32,29 +37,35 @@ function setup(){
     sliderRange(0, 255, 1);
     gui.addGlobals('opacity', 'bgColor');
 
+    sliderRange(0, 255, 1);
+    gui.addGlobals('ptColor');
+
+    // only call draw when then gui is changed
+    //noLoop();
 }
 
 //**********************************************************************************
 // Draw function
 function draw() {
-    // Setup canvas
-    createCanvas(windowWidth, windowHeight, WEBGL);
+
 
     scalar = windowHeight / 10;
     background(bgColor);
     // Canvas border
-    noFill();
-    stroke(blackSolid);
-    strokeWeight(1);
-    rect(-width/2, -height/2, width - 1, height - 1);
+    //noFill();
+    //stroke(blackSolid);
+    //strokeWeight(1);
+    //rect(-width/2, -height/2, width - 1, height - 1);
 
     push();
     translate(0, 0, 0);
-    rotateX(mouseX/(windowWidth/2) + (frameCount * speed));
-    rotateY(mouseY/(windowHeight/2) + (frameCount * speed));
+    //rotateX(mouseX/(windowWidth/2) + (frameCount * speed));
+    //rotateY(mouseY/(windowHeight/2) + (frameCount * speed));
+    rotateX(frameCount * speed);
+    rotateY(frameCount * speed);
     rotateZ(frameCount * speed);
     // Point mesh
-    stroke(blueSolid, opacity);
+    stroke(ptColor);
     strokeWeight(1);
     for(u = -PI; u < PI; u+=iteration) {
         for(v = -PI; v < PI; v+=iteration) {
@@ -78,6 +89,6 @@ function draw() {
 }
 
 // Dynamically adjust the canvas to the window
-function windowResized() {
-    resizeCanvas(windowWidth, windowHeight);
-}
+//function windowResized() {
+//    resizeCanvas(windowWidth, windowHeight);
+//}
