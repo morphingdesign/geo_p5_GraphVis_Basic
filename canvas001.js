@@ -1,8 +1,14 @@
 //**********************************************************************************
 // Declare variables
 
+// GUI
+let gui;
+
 // Color declaration
 let blackSolid, whiteSolid, redSolid, greenSolid, blueSolid;
+let bgColor = [0, 0, 0];
+let opacity = 150;
+
 let depth = 100;
 let scalar;
 let speed = 0.01;
@@ -12,6 +18,9 @@ let u, v;
 //**********************************************************************************
 // Setup function
 function setup(){
+    // Setup canvas
+
+
     // Color initialization
     whiteSolid = color(255, 255, 255);
     blackSolid = color(0, 0, 0);
@@ -19,9 +28,14 @@ function setup(){
     greenSolid = color(0, 255, 0);
     blueSolid = color(0, 0, 255);
 
-    // Setup canvas
-    //createCanvas(640, 480, WEBGL);
+    // Initialize GUI
+    gui = createGui('slider-range-2');
+    // set opacity range
+    sliderRange(0, 255, 1);
+    gui.addGlobals('opacity', 'bgColor');
 
+    // only call draw when then gui is changed
+    //noLoop();
 
 }
 
@@ -30,21 +44,22 @@ function setup(){
 function draw() {
     // Setup canvas
     createCanvas(windowWidth, windowHeight, WEBGL);
+
     scalar = windowHeight / 10;
-    background(blackSolid);
+    background(bgColor);
     // Canvas border
     noFill();
     stroke(blackSolid);
     strokeWeight(1);
-    rect(0, 0, width - 1, height - 1);
+    rect(-width/2, -height/2, width - 1, height - 1);
 
     push();
     translate(0, 0, 0);
     rotateX(mouseX/(windowWidth/2) + (frameCount * speed));
     rotateY(mouseY/(windowHeight/2) + (frameCount * speed));
     rotateZ(frameCount * speed);
-    // Shining stars
-    stroke(blueSolid);
+    // Point mesh
+    stroke(blueSolid, opacity);
     strokeWeight(1);
     noFill();
     for(u = -PI; u < PI; u+=iteration) {
@@ -66,4 +81,9 @@ function draw() {
     }
     ellipse(mouseX, mouseY, 80, 80);
      **/
+}
+
+// Dynamically adjust the canvas to the window
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
 }
