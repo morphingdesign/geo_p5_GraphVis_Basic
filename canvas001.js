@@ -14,6 +14,7 @@ var speed = 0.01;
 
 // Declare particle generator
 var particleGen;
+var bgParticles = true;
 
 // Color declaration
 let blackSolid, whiteSolid, redSolid, greenSolid, blueSolid;
@@ -26,6 +27,7 @@ let scalar;
 // Setup of pseudonyms for ctrl panel labels
 let iteration;
 let geoSizeMultiple;
+let bkgdParticles;
 
 let u, v;
 
@@ -81,7 +83,7 @@ function setup(){
 
     // set bgColor
     sliderRange(0, 255, 1);
-    gui.addGlobals('bgColor');
+    gui.addGlobals('bgColor', 'bgParticles');
 
     // only call draw when then gui is changed
     //noLoop();
@@ -123,6 +125,7 @@ function draw() {
     // draw() so that they can be updated as the var values are updated in setup().
     iteration = density;
     geoSizeMultiple = zoom;
+    bkgdParticles = bgParticles;
 
     scalar = windowHeight / geoSizeMultiple;
     background(bgColor);
@@ -154,12 +157,28 @@ function draw() {
     pop();
 
     // Drawing of generated particles
-    particleGen.Draw();
-    particleGen.Create();
-    particleGen.Step();
-    noStroke();
-    text(particleGen.length, width/2, 20);
-    stroke(0);
+    //particleGen.Draw();
+    //particleGen.Create();
+    //particleGen.Step();
+    if (bgParticles){
+        particleGen.Draw();
+        particleGen.Create();
+        particleGen.Step();
+        // Stops all particle generation
+        //particleGen.Stop();
+    }
+    else{
+        //particleGen.Stop();
+        //particleGen.Draw();
+
+        // Option to create a single particle object
+        //particleGen.Create();
+        // Option to create bursts of particles
+        //particleGen.CreateN();
+
+        //particleGen.Step();
+    }
+
 
 }
 
