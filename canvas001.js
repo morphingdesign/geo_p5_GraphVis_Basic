@@ -3,18 +3,25 @@
 
 // GUI
 let gui;
-var bgColor = [0, 0, 0];
-var opacity = 150;
 
-var ptColor = [0, 0, 0];
+// GUI library requires the use of 'var' to define variables, and not 'let'
+var bgColor = [0, 0, 0];
+var ptSize = 1;
+var ptColor = [255, 255, 255];
+var density = .1;
+var zoom = 10;
+var speed = 0.01;
+
 // Color declaration
 let blackSolid, whiteSolid, redSolid, greenSolid, blueSolid;
 
-
 let depth = 100;
 let scalar;
-let speed = 0.01;
-let iteration = .1;
+
+// Setup of pseudonyms for ctrl panel labels
+let iteration;
+let geoSizeMultiple;
+
 let u, v;
 
 //**********************************************************************************
@@ -32,13 +39,36 @@ function setup(){
     blueSolid = color(0, 0, 255);
 
     // Initialize GUI
-    gui = createGui('slider-range-2');
-    // set opacity range
-    sliderRange(0, 255, 1);
-    gui.addGlobals('opacity', 'bgColor');
+    gui = createGui('Control Panel');
 
+    // slider range controls
+    /** sliderRange() function parameters include:
+     * (bottom of range, top of range, density)
+     * Colors do not require the parameters since they automatically include the
+     * range of color values. Labels are defined by the var name, so pseudonyms
+     * can be created to reassign labels.  See ex. iteration/density & geoSizeMultiple/zoom.
+    **/
+
+    // set ptSize range
+    // include ptColor
+    sliderRange(1, 10, 1);
+    gui.addGlobals('ptSize', 'ptColor');
+
+    // set density range
+    sliderRange(0.05, 0.2, 0.01);
+    gui.addGlobals('density');
+
+    // set geoSizeMultiple range
+    sliderRange(8, 20, .01);
+    gui.addGlobals('zoom');
+
+    // set speed range
+    sliderRange(0.001, 0.05, 0.001);
+    gui.addGlobals('speed');
+
+    // set bgColor
     sliderRange(0, 255, 1);
-    gui.addGlobals('ptColor');
+    gui.addGlobals('bgColor');
 
     // only call draw when then gui is changed
     //noLoop();
@@ -48,8 +78,12 @@ function setup(){
 // Draw function
 function draw() {
 
+    // The following pseudonyms were declared before setup() but then initialized in
+    // draw() so that they can be updated as the var values are updated in setup().
+    iteration = density;
+    geoSizeMultiple = zoom;
 
-    scalar = windowHeight / 10;
+    scalar = windowHeight / geoSizeMultiple;
     background(bgColor);
     // Canvas border
     //noFill();
@@ -66,7 +100,7 @@ function draw() {
     rotateZ(frameCount * speed);
     // Point mesh
     stroke(ptColor);
-    strokeWeight(1);
+    strokeWeight(ptSize);
     for(u = -PI; u < PI; u+=iteration) {
         for(v = -PI; v < PI; v+=iteration) {
             let ptX = (2 * sin(3 * u) / (2 + cos(v))) * scalar;
@@ -77,18 +111,10 @@ function draw() {
         }
     }
     pop();
-    /**
-     noStroke();
-    if(mouseIsPressed) {
-        fill(redSolid);
-    } else{
-        fill(blueSolid);
-    }
-    ellipse(mouseX, mouseY, 80, 80);
-     **/
+
 }
 
 // Dynamically adjust the canvas to the window
-//function windowResized() {
-//    resizeCanvas(windowWidth, windowHeight);
-//}
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+}

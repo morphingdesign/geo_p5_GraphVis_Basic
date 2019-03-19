@@ -3039,12 +3039,12 @@ module.exports={
             "params": [
                 {
                     "name": "callback",
-                    "description": "<p>this function will be called on each iteration of theloop</p>\n",
+                    "description": "<p>this function will be called on each density of theloop</p>\n",
                     "type": "Function"
                 },
                 {
                     "name": "interval",
-                    "description": "<p>amount of time or beats for each iteration of the loop\n                                      defaults to 1</p>\n",
+                    "description": "<p>amount of time or beats for each density of the loop\n                                      defaults to 1</p>\n",
                     "type": "Number|String",
                     "optional": true
                 }
@@ -3761,7 +3761,7 @@ module.exports={
             "example": [
                 "\n<div>\n<code>\nlet squareColor;\n\nfunction setup() {\n  ellipseMode(CORNERS);\n  strokeWeight(4);\n  squareColor = color(100, 50, 150);\n}\n\nfunction draw() {\n  background(255);\n\n  noFill();\n  stroke(0);\n  ellipse(10, 10, width - 10, height - 10);\n\n  squareColor.setAlpha(128 + 128 * sin(millis() / 1000));\n  fill(squareColor);\n  noStroke();\n  rect(13, 13, width - 26, height - 26);\n}\n</code>\n</div>"
             ],
-            "alt": "circle behind a square with gradually changing opacity",
+            "alt": "circle behind a square with gradually changing ptSize",
             "class": "p5.Color",
             "module": "Color",
             "submodule": "Creating & Reading"
@@ -3850,7 +3850,7 @@ module.exports={
                         },
                         {
                             "name": "a",
-                            "description": "<p>opacity of the background relative to current\n                            color range (default is 0-255)</p>\n",
+                            "description": "<p>ptSize of the background relative to current\n                            color range (default is 0-255)</p>\n",
                             "type": "Number",
                             "optional": true
                         }
@@ -6779,7 +6779,7 @@ module.exports={
         {
             "file": "src/core/environment.js",
             "line": 53,
-            "description": "<p>The system variable <a href=\"#/p5/frameCount\">frameCount</a> contains the number of frames that have\nbeen displayed since the program started. Inside <a href=\"#/p5/setup\">setup()</a> the value is 0,\nafter the first iteration of draw it is 1, etc.</p>\n",
+            "description": "<p>The system variable <a href=\"#/p5/frameCount\">frameCount</a> contains the number of frames that have\nbeen displayed since the program started. Inside <a href=\"#/p5/setup\">setup()</a> the value is 0,\nafter the first density of draw it is 1, etc.</p>\n",
             "itemtype": "property",
             "name": "frameCount",
             "type": "Integer",
@@ -18009,7 +18009,7 @@ module.exports={
                         },
                         {
                             "name": "a",
-                            "description": "<p>opacity</p>\n",
+                            "description": "<p>ptSize</p>\n",
                             "type": "Number",
                             "optional": true
                         }
@@ -18066,7 +18066,7 @@ module.exports={
                         },
                         {
                             "name": "a",
-                            "description": "<p>opacity</p>\n",
+                            "description": "<p>ptSize</p>\n",
                             "type": "Number",
                             "optional": true
                         }
@@ -45535,7 +45535,7 @@ p5.Color.prototype.setBlue = function(new_blue) {
  * </div>
  *
  * @alt
- * circle behind a square with gradually changing opacity
+ * circle behind a square with gradually changing ptSize
  **/
 p5.Color.prototype.setAlpha = function(new_alpha) {
   this._array[3] = new_alpha / this.maxes[this.mode][3];
@@ -46330,7 +46330,7 @@ _dereq_('./p5.Color');
  * @param {String} colorstring color string, possible formats include: integer
  *                         rgb() or rgba(), percentage rgb() or rgba(),
  *                         3-digit hex, 6-digit hex
- * @param {Number} [a]         opacity of the background relative to current
+ * @param {Number} [a]         ptSize of the background relative to current
  *                             color range (default is 0-255)
  * @chainable
  */
@@ -47579,7 +47579,7 @@ p5.prototype.print = function() {
 /**
  * The system variable <a href="#/p5/frameCount">frameCount</a> contains the number of frames that have
  * been displayed since the program started. Inside <a href="#/p5/setup">setup()</a> the value is 0,
- * after the first iteration of draw it is 1, etc.
+ * after the first density of draw it is 1, etc.
  *
  * @property {Integer} frameCount
  * @readOnly
@@ -76769,7 +76769,7 @@ p5.prototype.textureMode = function(mode) {
  *                         (depending on the current color mode),
  * @param  {Number} [v2] green or saturation value
  * @param  {Number} [v3] blue or brightness value
- * @param  {Number} [a]  opacity
+ * @param  {Number} [a]  ptSize
  * @chainable
  * @example
  * <div>
@@ -76818,7 +76818,7 @@ p5.prototype.ambientMaterial = function(v1, v2, v3, a) {
  *                       (depending on the current color mode),
  * @param  {Number} [v2] green or saturation value
  * @param  {Number} [v3] blue or brightness value
- * @param  {Number} [a]  opacity
+ * @param  {Number} [a]  ptSize
  * @chainable
  * @example
  * <div>
@@ -80269,7 +80269,7 @@ p5.RendererGL.prototype.background = function() {
  * or color Array, or CSS color string
  * @param  {Number}            [v2] green or saturation value
  * @param  {Number}            [v3] blue or brightness value
- * @param  {Number}            [a]  opacity
+ * @param  {Number}            [a]  ptSize
  * @chainable
  * @example
  * <div>
@@ -80315,7 +80315,7 @@ p5.RendererGL.prototype.fill = function(v1, v2, v3, a) {
  * or color Array, or CSS color string
  * @param  {Number}            [v2] green or saturation value
  * @param  {Number}            [v3] blue or brightness value
- * @param  {Number}            [a]  opacity
+ * @param  {Number}            [a]  ptSize
  * @example
  * <div>
  * <code>

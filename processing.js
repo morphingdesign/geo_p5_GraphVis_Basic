@@ -2008,7 +2008,7 @@ module.exports = function(options,undef) {
 
       // set up the template element
       var element = document.createElement("span");
-      element.style.cssText = 'position: absolute; top: 0; left: 0; opacity: 0; font-family: "PjsEmptyFont", fantasy;';
+      element.style.cssText = 'position: absolute; top: 0; left: 0; ptSize: 0; font-family: "PjsEmptyFont", fantasy;';
       element.innerHTML = "AAAAAAAA";
       document.body.appendChild(element);
       this.template = element;
@@ -2080,7 +2080,7 @@ module.exports = function(options,undef) {
 
       // also create the element to load and compare the new font
       var element = document.createElement("span");
-      element.style.cssText = "position: absolute; top: 0; left: 0; opacity: 0;";
+      element.style.cssText = "position: absolute; top: 0; left: 0; ptSize: 0;";
       element.style.fontFamily = '"' + fontName + '", "PjsEmptyFont", fantasy';
       element.innerHTML = "AAAAAAAA";
       document.body.appendChild(element);
@@ -4578,13 +4578,13 @@ module.exports = function(options) {
   };
   /**
    * @member PShapeSVG
-   * The parseColors() function handles parsing the opacity, strijem stroke-width, stroke-linejoin,stroke-linecap, fill, and style attributes
+   * The parseColors() function handles parsing the ptSize, strijem stroke-width, stroke-linejoin,stroke-linecap, fill, and style attributes
    *
    * @param {XMLElement}element the element of which attributes to parse
    */
   PShapeSVG.prototype.parseColors = function(element) {
-    if (element.hasAttribute("opacity")) {
-      this.setOpacity(element.getAttribute("opacity"));
+    if (element.hasAttribute("ptSize")) {
+      this.setOpacity(element.getAttribute("ptSize"));
     }
     if (element.hasAttribute("stroke")) {
       this.setStroke(element.getAttribute("stroke"));
@@ -4613,7 +4613,7 @@ module.exports = function(options) {
         var tokens = CommonFunctions.trim(styleTokens[i].split( ":" ));
         if (tokens[0] === "fill") {
             this.setFill(tokens[1]);
-        } else if (tokens[0] === "fill-opacity") {
+        } else if (tokens[0] === "fill-ptSize") {
             this.setFillOpacity(tokens[1]);
         } else if (tokens[0] === "stroke") {
             this.setStroke(tokens[1]);
@@ -4623,9 +4623,9 @@ module.exports = function(options) {
             this.setStrokeCap(tokens[1]);
         } else if (tokens[0] === "stroke-linejoin") {
             this.setStrokeJoin(tokens[1]);
-        } else if (tokens[0] === "stroke-opacity") {
+        } else if (tokens[0] === "stroke-ptSize") {
             this.setStrokeOpacity(tokens[1]);
-        } else if (tokens[0] === "opacity") {
+        } else if (tokens[0] === "ptSize") {
             this.setOpacity(tokens[1]);
         } // Other attributes are not yet implemented
       }
@@ -4681,7 +4681,7 @@ module.exports = function(options) {
    * @member PShapeSVG
    * PShapeSVG.parseColors() helper function
    *
-   * @param {String} opacity the value of opacity
+   * @param {String} opacity the value of ptSize
    *
    * @see PShapeSVG#parseColors
    */
@@ -4777,7 +4777,7 @@ module.exports = function(options) {
    * @member PShapeSVG
    * PShapeSVG.parseColors() helper function
    *
-   * @param {String} opacityText the value to set stroke opacity to
+   * @param {String} opacityText the value to set stroke ptSize to
    *
    * @see PShapeSVG#parseColors
    */
@@ -9390,7 +9390,7 @@ module.exports = function setupParser(Processing, options) {
     var e = {}, added = false;
     e.BufferMax = 200;
     e.wrapper = document.createElement("div");
-    e.wrapper.setAttribute("style", "opacity:.75;display:block;position:fixed;bottom:0px;left:0px;right:0px;height:50px;background-color:#aaa");
+    e.wrapper.setAttribute("style", "ptSize:.75;display:block;position:fixed;bottom:0px;left:0px;right:0px;height:50px;background-color:#aaa");
     e.dragger = document.createElement("div");
     e.dragger.setAttribute("style", "display:block;border:3px black raised;cursor:n-resize;position:absolute;top:0px;left:0px;right:0px;height:5px;background-color:#333");
     e.closer = document.createElement("div");
@@ -9401,7 +9401,7 @@ module.exports = function setupParser(Processing, options) {
       e.closer.style.setProperty("background-color", "#ddd");
     };
     e.closer.innerHTML = "&#10006;";
-    e.closer.setAttribute("style", "opacity:.5;display:block;border:3px black raised;position:absolute;top:10px;right:30px;height:20px;width:20px;background-color:#ddd;color:#000;line-height:20px;text-align:center;cursor:pointer;");
+    e.closer.setAttribute("style", "ptSize:.5;display:block;border:3px black raised;position:absolute;top:10px;right:30px;height:20px;width:20px;background-color:#ddd;color:#000;line-height:20px;text-align:center;cursor:pointer;");
     e.javaconsole = document.createElement("div");
     e.javaconsole.setAttribute("style", "overflow-x: auto;display:block;position:absolute;left:10px;right:0px;bottom:5px;top:10px;overflow-y:scroll;height:40px;");
     e.wrapper.appendChild(e.dragger);
@@ -15621,7 +15621,7 @@ module.exports = function setupParser(Processing, options) {
      *
      * specular(gray, alpha)
      * @param {int | float} gray number specifying value between white and black
-     * @param {int | float} alpha opacity
+     * @param {int | float} alpha ptSize
      *
      * specular(color)
      * @param {color} color any value of the color datatype
@@ -15635,7 +15635,7 @@ module.exports = function setupParser(Processing, options) {
      * @param {int | float} v1 red or hue value
      * @param {int | float} v2 green or saturation value
      * @param {int | float} v3 blue or brightness value
-     * @param {int | float} alpha opacity
+     * @param {int | float} alpha ptSize
      *
      * @returns none
      *
@@ -15779,7 +15779,7 @@ module.exports = function setupParser(Processing, options) {
      * @param {int|float} value1  red or hue value
      * @param {int|float} value2  green or saturation value
      * @param {int|float} value3  blue or brightness value
-     * @param {int|float} alpha   opacity of the fill
+     * @param {int|float} alpha   ptSize of the fill
      * @param {Color} color       any value of the color datatype
      * @param {int} hex           color value in hexadecimal notation (i.e. #FFCC00 or 0xFFFFCC00)
      *
@@ -15849,7 +15849,7 @@ module.exports = function setupParser(Processing, options) {
      * @param {int|float} value1  red or hue value
      * @param {int|float} value2  green or saturation value
      * @param {int|float} value3  blue or brightness value
-     * @param {int|float} alpha   opacity of the stroke
+     * @param {int|float} alpha   ptSize of the stroke
      * @param {Color} color       any value of the color datatype
      * @param {int} hex           color value in hexadecimal notation (i.e. #FFCC00 or 0xFFFFCC00)
      *
@@ -19270,7 +19270,7 @@ module.exports = function setupParser(Processing, options) {
      * @param {int|float} value1  red or hue value (depending on the current color mode)
      * @param {int|float} value2  green or saturation value (depending on the current color mode)
      * @param {int|float} value3  blue or brightness value (depending on the current color mode)
-     * @param {int|float} alpha   opacity of the background
+     * @param {int|float} alpha   ptSize of the background
      * @param {Color} color       any value of the color datatype
      * @param {int} hex           color value in hexadecimal notation (i.e. #FFCC00 or 0xFFFFCC00)
      * @param {PImage} image      an instance of a PImage to use as a background
@@ -19434,7 +19434,7 @@ module.exports = function setupParser(Processing, options) {
      * textures in 3D.
      *
      * @param {int|float} gray    any valid number
-     * @param {int|float} alpha    opacity of the image
+     * @param {int|float} alpha    ptSize of the image
      * @param {int|float} value1  red or hue value
      * @param {int|float} value2  green or saturation value
      * @param {int|float} value3  blue or brightness value
