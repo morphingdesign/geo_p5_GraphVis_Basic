@@ -86,10 +86,11 @@ function setup(){
     // only call draw when then gui is changed
     //noLoop();
 
-    // Variable with JSON data to initiate particles
+    // Variable with user-defined data to initiate particles
     var t =
         {
             name: "test",
+            // Colors array is based on the particle's lifetime
             colors: [blackAlpha10, blackAlpha200],
             // Gravity draws the particles back down based on lifetime parameter
             gravity: .1,
