@@ -5,4 +5,8 @@ p5.js Exploration
 Web link demonstrating active operation: http://www.morphingdesign.com/process/sandbox001/
 <br />
 <br />
-
+Program Screen Captures:
+<br />
+<br />
+![Intro Screen Capture](images/screen_tranguloidTrefoil.png)
+<br />
