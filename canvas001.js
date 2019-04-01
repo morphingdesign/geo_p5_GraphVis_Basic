@@ -1,4 +1,4 @@
-//**********************************************************************************
+//##################################################################################
 // Declare variables
 
 // GUI
@@ -31,7 +31,8 @@ let bkgdParticles;
 
 let u, v;
 
-//**********************************************************************************
+//##################################################################################
+//##################################################################################
 // Setup function
 function setup(){
 
@@ -114,10 +115,10 @@ function setup(){
 
     // Initiate particle generator
     particleGen = new Fountain(null, t);
-
 }
 
-//**********************************************************************************
+//##################################################################################
+//##################################################################################
 // Draw function
 function draw() {
 
@@ -129,12 +130,8 @@ function draw() {
 
     scalar = windowHeight / geoSizeMultiple;
     background(bgColor);
-    // Canvas border
-    //noFill();
-    //stroke(blackSolid);
-    //strokeWeight(1);
-    //rect(-width/2, -height/2, width - 1, height - 1);
 
+    //******************************************************************************
     push();
     translate(0, 0, 0);
     //rotateX(mouseX/(windowWidth/2) + (frameCount * speed));
@@ -155,7 +152,7 @@ function draw() {
         }
     }
     pop();
-
+    //******************************************************************************
     // Drawing of generated particles
     //particleGen.Draw();
     //particleGen.Create();
@@ -178,10 +175,9 @@ function draw() {
 
         //particleGen.Step();
     }
-
-
 }
 
+//##################################################################################
 // Dynamically adjust the canvas to the window
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
