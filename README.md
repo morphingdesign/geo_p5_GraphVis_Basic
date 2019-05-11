@@ -2,7 +2,7 @@
 p5.js Exploration
 <br />
 <br />
-Web link demonstrating active operation: http://www.morphingdesign.com/process/sandbox001/
+Web link demonstrating active operation: https://morphingdesign.github.io/p5_sandbox_001/index.html
 <br />
 <br />
 Program Screen Captures:
