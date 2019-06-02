@@ -1,8 +1,8 @@
-# p5_sandbox_001
+# geo_p5_GraphVis_Basic
 p5.js Exploration
 <br />
 <br />
-Web link demonstrating active operation: https://morphingdesign.github.io/p5_sandbox_001/index.html
+This was the initial exploration of the P5.js library and use of the p5.gui library and particles. The following web link demonstrates its active operation with control panel: https://morphingdesign.github.io/geo_p5_GraphVis_Basic/
 <br />
 <br />
 Program Screen Captures:
